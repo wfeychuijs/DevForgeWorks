@@ -1,17 +1,9 @@
-// Fund Alice and sponsor accounts
-await aptos.fundAccount({
-  accountAddress: aliceAddress,
-  amount: ALICE_INITIAL_BALANCE,
-});
-await aptos.fundAccount({
-  accountAddress: sponsorAddress,
-  amount: SPONSOR_INITIAL_BALANCE,
-});
-
-// Show account balances
-const aliceBalanceBefore = await aptos.getAccountCoinsData({
-  accountAddress: aliceAddress,
-});
-const sponsorBalanceBefore = await aptos.getAccountCoinsData({
-  accountAddress: sponsorAddress,
-});
+function isSubsequence(s, t) {
+  let i = 0;
+  let j = 0;
+  while (i < s.length && j < t.length) {
+    if (s[i] === t[j]) i++;
+    j++;
+  }
+  return i === s.length;
+}
