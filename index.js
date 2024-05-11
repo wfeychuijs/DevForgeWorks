@@ -1,14 +1,12 @@
-function subarraySum(nums, k) {
-  const map = new Map();
-  map.set(0, 1);
-  let count = 0;
-  let sum = 0;
-  for (const num of nums) {
-    sum += num;
-    if (map.has(sum - k)) {
-      count += map.get(sum - k);
+function moveZeroes(nums) {
+  let index = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== 0) {
+      nums[index++] = nums[i];
     }
-    map.set(sum, (map.get(sum) || 0) + 1);
   }
-  return count;
+  for (let i = index; i < nums.length; i++) {
+    nums[i] = 0;
+  }
+  return nums;
 }
