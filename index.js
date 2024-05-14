@@ -1,24 +1,13 @@
-function isValidSudoku(board) {
-  const rows = Array(9)
-    .fill()
-    .map(() => new Set());
-  const cols = Array(9)
-    .fill()
-    .map(() => new Set());
-  const boxes = Array(9)
-    .fill()
-    .map(() => new Set());
-  for (let i = 0; i < 9; i++) {
-    for (let j = 0; j < 9; j++) {
-      const num = board[i][j];
-      if (num === ".") continue;
-      const boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
-      if (rows[i].has(num) || cols[j].has(num) || boxes[boxIndex].has(num))
-        return false;
-      rows[i].add(num);
-      cols[j].add(num);
-      boxes[boxIndex].add(num);
-    }
+function numDecodings(s) {
+  if (s.length === 0) return 0;
+  const dp = new Array(s.length + 1).fill(0);
+  dp[0] = 1;
+  dp[1] = s[0] !== "0" ? 1 : 0;
+  for (let i = 2; i <= s.length; i++) {
+    const oneDigit = parseInt(s.substring(i - 1, i));
+    const twoDigits = parseInt(s.substring(i - 2, i));
+    if (oneDigit >= 1) dp[i] += dp[i - 1];
+    if (twoDigits >= 10 && twoDigits <= 26) dp[i] += dp[i - 2];
   }
-  return true;
+  return dp[s.length];
 }
